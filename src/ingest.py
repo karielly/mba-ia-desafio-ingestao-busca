@@ -62,7 +62,6 @@ def ingest_pdf():
         print("Nenhum conteúdo encontrado no PDF.")
         sys.exit(1)
 
-    # Salva no PGVector (cria coleção/tabela internamente se necessário)
     store = PGVector(
         embeddings=embeddings,
         collection_name=collection,

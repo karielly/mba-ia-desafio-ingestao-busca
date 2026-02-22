@@ -83,7 +83,6 @@ def get_llm():
 
 
 def build_context(results: List[Tuple]) -> str:
-    # results: List[(Document, score)]
     parts = []
     for doc, score in results:
         text = (doc.page_content or "").strip()
@@ -125,12 +124,10 @@ def search_prompt(question=None):
 
         prompt = PROMPT_TEMPLATE.format(contexto=contexto, pergunta=pergunta)
 
-        # Chamando LLM
         response = llm.invoke(prompt)
         text = getattr(response, "content", None) or str(response)
         text = text.strip()
-
-        # Segurança extra: se o modelo não respeitar, força a regra mínima
+        
         if not text:
             text = OUT_OF_CONTEXT_MSG
 
